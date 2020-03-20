@@ -1,5 +1,25 @@
+--- 
+title: "Problems and solutions"
+author: "Xiaofang-Feng"
+output: pdf_document 
+---
 
-first error:
+#The compilation steps are as follows:
+
+```{r eval=FALSE}
+
+setwd("C:/Users/Administrator/Desktop/git/adv-r-master")
+
+install.packages("bookdown")
+
+install.packages("rmarkdown")
+
+bookdown::render_book("index.Rmd", output_format="bookdown::pdf_book", encoding="UTF-8")
+
+```
+
+
+##error in Introduction.Rmd
 
 Quitting from lines 223-235 (Introduction.Rmd) 
 Error in cat(paste0(contributors$desc, collapse = ", ")) : 
@@ -7,19 +27,43 @@ Error in cat(paste0(contributors$desc, collapse = ", ")) :
 Calls: local ... withCallingHandlers -> withVisible -> eval -> eval -> cat
 
 Adding encoding = "UTF-8" in line 224 can fix it.
+```{r eval=FALSE}
 
 contributors <- read.csv("contributors.csv", stringsAsFactors = FALSE, encoding = "UTF-8")
 
-second error:
+```
+
+##error in no package with the name 'emo':
 
 Quitting from lines 96-103 (Functionals.Rmd) 
 Error in loadNamespace(name) : 不存在叫'emo'这个名字的程辑包
 Calls: local ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
 
+*Using
+```{r eval=FALSE}
+
 devtools::install_github("hadley/emo")#The following error occurs again
+
+```
 
 Downloading GitHub repo hadley/emo@master
 Error in utils::download.file(url, path, method = method, quiet = quiet,  : 
   无法打开URL'https://api.github.com/repos/hadley/emo/tarball/master'
-  
-It's not settled yet
+
+*Input $ git config --global http.sslBackend "openssl", $ git config --global http.sslCAInfo C:/Users/Administrator/Desktop/git/adv-r-master in gitbash
+Then 
+```{r eval=FALSE} 
+
+devtools::install_github("hadley/sloop",force = TRUE), 
+devtools::install_github("hadley/emo") #error occurs again
+
+```
+
+错误: Failed to install 'unknown package' from GitHub:
+  Send failure: Connection was reset
+
+*It's not settled yet
+
+
+#In summary, I installed the following packages, named desc, sessioninfo,lobstr,testthat,emo,tibble, sloop,DBI,RSQLite,dbplyr,profvis,bench and ggbeeswarm. 
+Most of them can be installed by install.packages(), but emo can not. 
